@@ -1,7 +1,7 @@
 const Web3 = require("web3");
 const { Ocean, DataTokens } = require("@oceanprotocol/lib");
 const { testData } = require("./data");
- 
+
 const { factoryABI } = require("@oceanprotocol/contracts/artifacts/DTFactory.json");
 const { datatokensABI } = require("@oceanprotocol/contracts/artifacts/DataTokenTemplate.json");
 const { config, contracts, urls } = require("./config");
@@ -12,6 +12,7 @@ const run = async () => {
     const blob = `https://172.15.0.4/api/v1/services/consume`;
     const ocean = await Ocean.getInstance(config);
     const accounts = await ocean.accounts.list();
+    const web3 = new Web3(urls.networkUrl)
       
     const alice = accounts[0];
     const bob = accounts[1];
@@ -33,12 +34,14 @@ const run = async () => {
     console.log(`Deployed datatoken address: ${tokenAddress}`);
   
       //  Alice Mints 2000 datatokens
-    const transaction1 = await datatoken.mint(tokenAddress, alice.getId(), '2000', alice.getId())
+    const transaction1 = await datatoken.mint(tokenAddress, alice.getId(), '10000', alice.getId())
     const transactionId1 = transaction1['transactionHash']
     console.log('transactionId 1', transactionId1)
     
     let aliceBalance = await datatoken.balance(tokenAddress, alice.getId())
     console.log('Alice token balance:', aliceBalance)
+
+    await datatoken.mint(ocean.pool.oceanAddress, alice.getId(), "10000")
 
     //  Alice Sends 50 datatokens to bob
     const transaction2 = await datatoken.transfer(tokenAddress, bob.getId(), '50', alice.getId())
@@ -100,6 +103,29 @@ const run = async () => {
       bobBalance = await datatoken.balance(tokenAddress, bob.getId())
       console.log("Bob token balance:", bobBalance)
 
+      // Alice should create a Pool pricing for her asset
+      const dtAmount = '45'
+      const dtWeight = '9'
+      const oceanAmount = (parseFloat(dtAmount) * (10 - parseFloat(dtWeight))) / parseFloat(dtWeight)
+      console.log("oceanAmount", oceanAmount)
+      const oceanBalance = await web3.eth.getBalance(alice.getId())
+      console.log("oceanBalance", oceanBalance)
+      
+      const fee = '0.02'
+      aliceBalance = await datatoken.balance(tokenAddress, alice.getId())
+      console.log('Alice token balance:', aliceBalance)
+
+      const createTx = await ocean.pool.create(
+        alice.getId(),
+        tokenAddress,
+        dtAmount,
+        dtWeight,
+        String(oceanAmount),
+        fee
+      )
+    
+      const alicePoolAddress = createTx.events.BPoolRegistered.returnValues[0]
+      console.log(alicePoolAddress)
 };
 
 run();

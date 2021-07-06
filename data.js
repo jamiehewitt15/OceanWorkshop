@@ -8,7 +8,7 @@ const testData = {
       files: [
         {
           url:
-            "https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls",
+            "https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv",
           contentType: "xlsx",
         },
       ],
