@@ -1,33 +1,30 @@
-const { ConfigHelper } = require("@oceanprotocol/lib")
-const Web3 = require("web3")
-const defaultConfig = new ConfigHelper().getConfig("development")
+const { ConfigHelper } = require("@oceanprotocol/lib");
+const Web3 = require("web3");
+const defaultConfig = new ConfigHelper().getConfig("development");
 
 const urls = {
-    networkUrl: "http://localhost:8545",
-    aquarius: "http://localhost:5000",
-    providerUri: "http://localhost:8030",
-}
+networkUrl: "http://localhost:8545",
+aquarius: "http://localhost:5000",
+providerUri: "http://localhost:8030",
+};
 
 const contracts = {
-    "DTFactory": "0xb56C5411dA4394D0Bb7Ff27ffb27822D6E953FCa",
-    "BFactory": "0x907cA6469867bC254F2767E3240138ec9231b0E5",
-    "FixedRateExchange": "0x291f86a873A1b42Fb544451268d6205Cd6B3E5E6",
-    "Metadata": "0x07F8A68375883B8A95b3D62DD699e2220c3f3cA9",
-    "Ocean": "0x8c3b64E723080BFc7Cc58Cf3625C84A3793810A4",
-    "Dispenser": "0xFCf139FC39078C510471Fed0a0316F4008535F07"
-   };
-   
-   const config = {
-    ...defaultConfig,
-    metadataCacheUri: urls.aquarius,
-    providerUri: urls.providerUri,
-    web3Provider: new Web3(urls.networkUrl),
-   };
+    "DTFactory": "0x62E7C83e550f278D29d1bF789706dcE773d4d6E1",
+    "BFactory": "0xf3C5F8FA99D6187c49e59d80BD8258347Ae08128",
+    "FixedRateExchange": "0xe63859307F79D5E7078b378B426e75BFCdF4645a",
+    "Metadata": "0xDabEEF0F679A4D1908E9ae05157d717fc5c42264",
+    "Ocean": "0x6ffbDb86b390aD442Cf6E61570c9D4247D8Fd028",
+    "Dispenser": "0x50c907f89C6BEb73e9B5776314ee2c5C223DfCd1"
+};
 
-   module.exports = {
-    config,
-    contracts,
-    urls,
-   };
-   
-   
+const config = {
+...defaultConfig,
+metadataCacheUri: urls.aquarius,
+providerUri: urls.providerUri,
+web3Provider: new Web3(urls.networkUrl),
+};
+module.exports = {
+config,
+contracts,
+urls,
+};
