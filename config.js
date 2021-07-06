@@ -9,12 +9,12 @@ providerUri: "http://localhost:8030",
 };
 
 const contracts = {
-    "DTFactory": "0x62E7C83e550f278D29d1bF789706dcE773d4d6E1",
-    "BFactory": "0xf3C5F8FA99D6187c49e59d80BD8258347Ae08128",
-    "FixedRateExchange": "0xe63859307F79D5E7078b378B426e75BFCdF4645a",
-    "Metadata": "0xDabEEF0F679A4D1908E9ae05157d717fc5c42264",
-    "Ocean": "0x6ffbDb86b390aD442Cf6E61570c9D4247D8Fd028",
-    "Dispenser": "0x50c907f89C6BEb73e9B5776314ee2c5C223DfCd1"
+    "DTFactory": "0xedd4B3ABb71cea17ac7910e0E4FF6aDc3656a351",
+    "BFactory": "0x6518B5AB2290552BCA0a0B0abFBfcb487234185f",
+    "FixedRateExchange": "0xA62D4a817EBaEe3C885FeE4ae7B27090369743e7",
+    "Metadata": "0xca08b8935a3086B549A6DCE8D0189e39A1F430a2",
+    "Ocean": "0xF9596bED220Ab30ff9aaE104DfC5D380E21c9259",
+    "Dispenser": "0xcD22E34cf82A9BA0fDa723071A79AddC19f7dc7D"
 };
 
 const config = {
